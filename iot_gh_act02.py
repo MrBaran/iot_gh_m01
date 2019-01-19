@@ -153,20 +153,65 @@ def test_temperature():
     print("Temp sensor test done.")
     print()    
 
-def test_analog():
+def test_pot():
     print()
-    print("Testing analog inputs")
+    print("Testing potentiometer input")
     print("Use Ctrl+C to end test.")
     try:
         while True:
             print()
             print("Pot value: %i" % ghs.analog.pot.get_value())
-            print("Light value:" + str(ghs.analog.light.get_value()))
-            print("Aux value:" + str(ghs.analog.aux.get_value()))
             sleep(1)
     except KeyboardInterrupt:
         pass
-    print("Analog test done.")
+    print("Potentiometer test done.")
+    print()
+
+def test_light_sensor():
+    print()
+    print("Testing light sensor")
+    print("Use Ctrl+C to end test.")
+    try:
+        while True:
+            print()
+            print("Light value: %i" % ghs.analog.light.get_value())
+            sleep(1)
+    except KeyboardInterrupt:
+        pass
+    print("Light sensor test done.")
+    print()
+
+def test_crazy():
+    print()
+    print("Turn the potentiometer counter-clockwise to start.")
+    print("Turn the potentiometer clockwise to increase crazy!")
+    print("Use Ctrl+C to end test.")
+    print()
+    try:
+        last_pot_value = 1
+        while last_pot_value > .05:
+            last_pot_value = ghs.analog.pot.get_value()
+        
+        ghs._pi.set_mode(2, pigpio.OUTPUT)
+        ghs._pi.set_PWM_dutycycle(2, .7)
+        while True:
+            pot_value = ghs.analog.pot.get_value()
+            if abs(pot_value - last_pot_value) > .05:
+                set_PWM_frequency(2, pot_value * 2)
+                last_pot_value = pot_value
+            if ghs._pi.read(2) == 1:
+                ghs.lamps.red.on()
+                ghs.lamps.white.off()
+                ghs.buzzer.off()
+            else:
+                ghs.lamps.red.off()
+                ghs.lamps.white.on()
+                ghs.buzzer.on()
+            print("*", end = "")
+            sleep(.2)
+    except KeyboardInterrupt:
+        pass
+    print("Crazy test done.")
     print()
         
 def show_menu():
@@ -180,6 +225,8 @@ def show_menu():
     print("\t5\tTest Servo")
     print("\t6\tTest Temperature")
     print("\t7\tTest Potentiometer")
+    print("\t8\tTest Light Sensor")
+    print("\t9\tCrazy Test!")
         
 
 def main():
@@ -206,13 +253,14 @@ def main():
             elif user_choice == 6:
                 test_temperature()
             elif user_choice == 7:
-                test_analog()
+                test_pot()
             elif user_choice == 8:
-                pass
+                test_light_sensor()
             elif user_choice == 9:
-                pass
+                test_crazy()
             else:
                 print("Invalid entry.")
+        sleep(.5)
     print("Done.")
 
 if __name__ == "__main__":
