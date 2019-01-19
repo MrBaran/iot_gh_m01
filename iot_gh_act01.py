@@ -6,7 +6,7 @@ from iot_gh.IoTGreenhouseService import IoTGreenhouseService
 
 print("IoT Greenhouse.\n")
 #Enter house name when prompted.
-name = input("Please enter a short name for your greenhouse.")
+name = input("Please enter a short name for your greenhouse: ")
 
 #Set up service and identifiers
 ghs = IoTGreenhouseService()
