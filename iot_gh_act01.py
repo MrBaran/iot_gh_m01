@@ -17,8 +17,8 @@ number = ghs.greenhouse.house_number
 #Provide identifiers to user
 print()
 print("Group ID: " + group)
-print("House Number:" + number)
-print("House Name:" + name)
+print("House Number: " + number)
+print("House Name: " + name)
 
 #Get greenhouse data and report
 print()
