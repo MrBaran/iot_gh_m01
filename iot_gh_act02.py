@@ -58,11 +58,13 @@ def test_switches():
             new_pb_state = ghs.switches.push_button.get_state()
             if new_pb_state != last_pb_state:
                 print("PB Switch", ghs.switches.push_button.get_status())
+                ghs.lamps.red.toggle()
                 last_pb_state = new_pb_state
 
             new_toggle_state = ghs.switches.toggle.get_state()
             if new_toggle_state != last_toggle_state:
                 print("Toggle Switch", ghs.switches.toggle.get_status())
+                ghs.lamps.white.toggle()
                 last_toggle_state = new_toggle_state
 
             sleep(.5)
