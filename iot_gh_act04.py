@@ -15,7 +15,7 @@ token = input("GroupMe token: ")
 last_message_id = None
 
 ghs = IoTGreenhouseService()
-ts = GHTextingService(TOKEN, ghs)
+ts = GHTextingService(token, ghs)
 
 while True:
     message = ts.last_message
