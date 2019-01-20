@@ -11,6 +11,7 @@ print("\nGroupMe SMS Texting for IoT Greenhouse.\n")
 name = input("Enter a short name for your greenhouse: ")
 print("\nOpen your dev.groupme.com page. Access your token and copy here.")
 token = input("GroupMe token: ")
+print()
 
 last_message_id = None
 
