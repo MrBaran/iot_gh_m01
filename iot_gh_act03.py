@@ -1,4 +1,4 @@
-''' IoT Greenhouse - Module 1: Activity 01
+''' IoT Greenhouse - Module 1: Activity 03
     Keith E. Kelly
     K2 Creatives, LLC
 '''
@@ -29,3 +29,20 @@ state = ghs.servo.get_status()
 print("House state is " + state)
 
 ghs.web_service.post_greenhouse()
+
+threshold = tempF + 5
+print("Threshold set to " + str(threshold))
+
+while True:
+    tempF = ghs.temperature.get_inside_temp_F()
+    status = ghs.servo.get_status()
+    print("temp = " + str(tempF))
+    if tempF > threshold and status == "CLOSED":
+        print("opening")
+        ghs.servo.move(1)
+    elif tempF < threshold and status == "OPEN":
+        print("closing")
+        ghs.servo.move(0)
+        
+    ghs.web_service.post_greenhouse()
+    sleep(5)

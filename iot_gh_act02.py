@@ -1,3 +1,7 @@
+''' IoT Greenhouse - Module 1: Activity 02
+    Keith E. Kelly
+    K2 Creatives, LLC
+'''
 from time import sleep
 from datetime import datetime
 from iot_gh.IoTGreenhouseService import IoTGreenhouseService
