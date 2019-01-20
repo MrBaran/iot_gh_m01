@@ -48,7 +48,7 @@ while True:
         print("closing")
         ghs.servo.move(0)
         
-    #part 2
+    #Extend controller
     fan_status = ghs.fan.get_status()
     if tempF > threshold + 5 and fan_status == "OFF":
         print("Activating fan.")
@@ -57,13 +57,12 @@ while True:
         print("Fan is off.")
         ghs.fan.off()
     
-    #part 3
     #uses white led to simulate heater
     heater_status = ghs.lamps.white.get_status()
     if tempF < threshold - 5 and heater_status == "OFF":
         print("Activating heater.")
         ghs.lamps.white.on()
-    if tempF > threshold - 5 and heater_status == "ON":
+    elif tempF > threshold - 5 and heater_status == "ON":
         print("Heater is off.")
         ghs.lamps.white.off()
 
