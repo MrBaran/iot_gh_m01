@@ -188,8 +188,8 @@ def test_crazy():
     print("Use Ctrl+C to end test.")
     print()
     try:
-        while last_pot_value > 50:
-            pass
+        while ghs.analog.pot.get_value() > 50:
+            sleep(.5)
         
         while True:
             pot_value = ghs.analog.pot.get_value()
@@ -207,9 +207,11 @@ def test_crazy():
             print("*", end = "")
 
     except KeyboardInterrupt:
-        pass
-    print("Crazy test done.")
-    print()
+            ghs.lamps.red.off()
+            ghs.lamps.white.off()
+            ghs.buzzer.off()
+    print("\nCrazy test done.\n")
+    
         
 def show_menu():
     print("IoT Greenhouse integration testing.")
