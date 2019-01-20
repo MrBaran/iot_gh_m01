@@ -30,8 +30,12 @@ print("House state is " + state)
 
 ghs.web_service.post_greenhouse()
 
+print("Use heat gun and coolant to modify internal temperature.")
+print("Greenhouse status updates based on threshold temp value.\n")
+
 threshold = tempF + 5
 print("Threshold set to " + str(threshold))
+print()
 
 while True:
     tempF = ghs.temperature.get_inside_temp_F()
