@@ -188,27 +188,24 @@ def test_crazy():
     print("Use Ctrl+C to end test.")
     print()
     try:
-        last_pot_value = 1
-        while last_pot_value > .05:
-            last_pot_value = ghs.analog.pot.get_value()
+        while last_pot_value > 50:
+            pass
         
-        ghs._pi.set_mode(2, pigpio.OUTPUT)
-        ghs._pi.set_PWM_dutycycle(2, .7)
         while True:
             pot_value = ghs.analog.pot.get_value()
-            if abs(pot_value - last_pot_value) > .05:
-                set_PWM_frequency(2, pot_value * 2)
-                last_pot_value = pot_value
-            if ghs._pi.read(2) == 1:
-                ghs.lamps.red.on()
-                ghs.lamps.white.off()
-                ghs.buzzer.off()
-            else:
-                ghs.lamps.red.off()
-                ghs.lamps.white.on()
-                ghs.buzzer.on()
+            period = 2.25 - (pot_value/512)
+            #stuff off
+            ghs.lamps.red.on()
+            ghs.lamps.white.off()
+            ghs.buzzer.off()
+            sleep(period * .7)
+            #stuff on
+            ghs.lamps.red.off()
+            ghs.lamps.white.on()
+            ghs.buzzer.on()
+            sleep(period * .3)
             print("*", end = "")
-            sleep(.2)
+
     except KeyboardInterrupt:
         pass
     print("Crazy test done.")
