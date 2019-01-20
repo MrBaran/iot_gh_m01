@@ -193,7 +193,7 @@ def test_crazy():
         
         while True:
             pot_value = ghs.analog.pot.get_value()
-            period = 2.25 - (pot_value/512)
+            period = 2.1 - (pot_value/512)
             #stuff off
             ghs.lamps.red.on()
             ghs.lamps.white.off()
